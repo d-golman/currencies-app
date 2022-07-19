@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from 'react-native';
+import { FC } from 'react';
+import { StyleSheet } from 'react-native';
+import RatesPage from './pages/rates';
+import HistoryPage from './pages/history';
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+const App: FC = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <StatusBar />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}>
+        <Stack.Screen
+          name="Rates"
+          component={RatesPage}
+        />
+        <Stack.Screen
+          name="History"
+          component={HistoryPage}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
